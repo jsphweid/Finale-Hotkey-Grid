@@ -5,6 +5,30 @@ Instead of combinations of keys depressed, it uses a sequence. With the help of 
 
 
 # Getting Started
-todo:
--download .exe and run (or AHK)
--
+
+download .exe and run (or AHK)
+
+# Making Modifications
+
+## Installing AutoHotkey
+
+## Running the Script
+
+## How-to-Mod...
+
+### Modify button names
+
+Each button is added to the gui like so
+```autohotkey
+Gui, Add, Button, x6 y37 %defaultTextButtonSize% gButton101, Transpose
+```
+Changing the name of a button is as easy as changing the last argumkent on the line. "Transpose" -> "Transposition"
+```autohotkey
+Gui, Add, Button, x6 y37 %defaultTextButtonSize% gButton101, Transposition
+```
+
+
+# Development ToDos
+
+- link to location of exe on getting started
+- 
