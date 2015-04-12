@@ -5,8 +5,9 @@ Instead of combinations of keys depressed, it uses a sequence. With the help of 
 
 
 # Getting Started
-
-download .exe and run (or AHK)
+- Download [zip](https://github.com/jsphweid/Finale-Hotkey-Grid/archive/v0.19.zip)
+- Extract zip
+- Run finale-grid-hotkey executable
 
 # Making Modifications
 
