@@ -465,6 +465,11 @@ printTabloid()
 	print("11 x 17")
 }
 
+printConcert()
+{
+	print("9x12")
+}
+
 activateExpressionTool()
 {
 	WinWaitActive, Finale
@@ -1386,13 +1391,11 @@ makeAllUpperCase()
 increaseMeasureWidth()
 {
 	switchToEVPUs()
-	activateMeasureTool()
+	activateSelectionTool()
 	Sleep, 50
 	Send, {Enter}
 	WinWaitActive, Measure Attributes
-	Sleep, 50
-	easyReplaceText([5],[500],"Measure Attributes")
-	Sleep, 50
+	easyReplaceText([5],["500p"],"Measure Attributes")
 	Send, {Enter}
 }
 
@@ -1701,4 +1704,66 @@ finishingTouchesAndChecksOnScore()
 	insertScoreSystemDividers()
 	IfWinExist, JW Accidentals
 		WinClose, JW Accidentals
+}
+
+printDraftOnLetter()
+{
+	CoordMode, Mouse, Screen
+	MouseGetPos, currentX, currentY
+	CoordMode, Mouse, Relative
+	goToPrint()
+	Send, !c!a
+	easyCheck([20,21],"Print")
+	Send, !s
+	WinWaitActive, Print Setup
+	Control, ChooseString, HP LaserJet 5200 UPD PCL 6, ComboBox1, Print Setup
+	Send, !p
+	WinWaitNotActive, Print Setup
+	WinActivate, Finale
+	WinWaitActive, HP LaserJet 5200 UPD PCL 6 Document Properties,,.3
+	if ErrorLevel
+		winactivate, HP LaserJet 5200 UPD PCL 6 Document Properties
+	Sleep, 100
+	MouseClick,left,120,211,,%clickSpeed%
+	sleep 100
+	Send, {Enter}
+	WinWaitNotActive, HP LaserJet 5200 UPD PCL 6 Document Properties
+	WinActivate, Finale
+	WinWaitActive, Print Setup,,.3
+	if ErrorLevel
+		WinActivate, Print Setup
+	Send, {Enter}
+	WinWaitActive, Print
+	Send, {Enter}
+
+
+	CoordMode, Mouse, Screen
+	MouseMove, currentX, currentY
+	CoordMode, Mouse, Relative
+
+}
+
+goToSpaceSystems()
+{
+	WinWaitActive, Finale
+	WinMenuSelectItem,Finale,,Plug-ins, Scoring and Arranging, Space Systems...
+	if ErrorLevel
+	{
+		MsgBox, Couldn't find the plug-in "Space Systems" in Scoring and Arranging.
+		Reload
+	}
+	WinWaitActive, Space Systems
+}
+
+spaceSystemsWithAdditionalGaps()
+{
+	goToSpaceSystems()
+	easyCheck([3],"Space Systems")
+	easyUncheck([9,10],"Space Systems")
+	easyReplaceText([3,4],[0,0],"Space Systems")
+	easyChooseString([1,2,4],["Current Part or Score","Center","Space with additional gaps"],"Space Systems")
+	Send, {Enter}
+	While, WinExist("Space Systems")
+		WinClose, Space Systems
+	WinWaitActive, Finale
 }

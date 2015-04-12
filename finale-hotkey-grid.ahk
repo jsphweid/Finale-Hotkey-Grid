@@ -1,4 +1,4 @@
-; Welcome to GRID Hotkey Interface v0.19.  I made this in an attempt to redesign hotkeys for Finale so
+; Welcome to GRID Hotkey Interface v0.20.  I made this in an attempt to redesign hotkeys for Finale so
 ; that they are intuitive, visual, quicker, ergonomic.  Using AutoHotKey Script, it creates a simple visual
 ; interface, activated by any hotkey of your choosing (default is TAB) to perform basic tool switching
 ; as well as complicated tasks.  The GRID is a way some games use to organize hotkeys so they mimic
@@ -61,6 +61,7 @@ global scorePage2OnPageMarginExtension
 ; How fast the mouse moves on macros that use the mouse in MOVEMENT
 global optimalKeyDelay
 SetKeyDelay, %optimalKeyDelay%
+global clickspeed:=2
 
 
 ; Scaling for Parts
@@ -142,12 +143,12 @@ Gui, Add, Button, x6 y37 %defaultTextButtonSize% gButton401 , -Parts-`nMake Part
 Gui, Add, Button, x106 y37 %defaultTextButtonSize% gButton402 , -Parts-`nPrep Part
 Gui, Add, Button, x206 y37 %defaultTextButtonSize% gButton403 , -Parts-`nAdd Title Page
 Gui, Add, Button, x306 y37 %defaultTextButtonSize% gButton404 ,-Parts-`nDrop System Margins
-Gui, Add, Button, x406 y37 %defaultTextButtonSize% gButton405 , Space systems evenly without changing number per page
+Gui, Add, Button, x406 y37 %defaultTextButtonSize% gButton405 , Space systems with additional gaps
 ; Gui, Add, Button, x6 y127 %defaultTextButtonSize% gButton406 , oooooooooooo
 ; Gui, Add, Button, x106 y127 %defaultTextButtonSize% gButton407 , oooooooooooo
 ; Gui, Add, Button, x206 y127 %defaultTextButtonSize% gButton408 , oooooooooooo
 Gui, Add, Button, x306 y127 %defaultTextButtonSize% gButton409 , Print 8.5 x 11
-; Gui, Add, Button, x406 y127 %defaultTextButtonSize% gButton410 , oooooooooooo
+Gui, Add, Button, x406 y127 %defaultTextButtonSize% gButton410 , Print 9 x 12
 Gui, Add, Button, x6 y217 %defaultTextButtonSize% gButton411 , -Parts-`nMake Big Time Signatures
 Gui, Add, Button, x106 y217 %defaultTextButtonSize% gButton412 , -Parts-`nMake Regular Time Signatures
 Gui, Add, Button, x206 y217 %defaultTextButtonSize% gButton413 , Adjust MultiMeasure Rest Width
@@ -155,7 +156,7 @@ Gui, Add, Button, x206 y217 %defaultTextButtonSize% gButton413 , Adjust MultiMea
 ; Gui, Add, Button, x406 y217 %defaultTextButtonSize% gButton415 , oooooooooooo
 
 Gui, Tab, 5 
-Gui, Add, Button, x6 y37 %defaultTextButtonSize% gButton501 , Change Selected to X-Shaped Noteheads (disables playback)
+Gui, Add, Button, x6 y37 %defaultTextButtonSize% gButton501 , Change Selected to X-Shaped Noteheads
 Gui, Add, Button, x106 y37 %defaultTextButtonSize% gButton502 , Add Octave
 Gui, Add, Button, x206 y37 %defaultTextButtonSize% gButton503 , -Score Only-`nCanonic Utilities
 Gui, Add, Button, x306 y37 %defaultTextButtonSize% gButton504 , Single Out Voice
@@ -186,7 +187,7 @@ Gui, Add, Button, x306 y37 %defaultTextButtonSize% gButton604 , Set Title Page L
 ; Gui, Add, Button, x106 y217 %defaultTextButtonSize% gButton612 , oooooooooooo
 ; ; Gui, Add, Button, x206 y217 %defaultTextButtonSize% gButton613 , oooooooooooo
 ; Gui, Add, Button, x306 y217 %defaultTextButtonSize% gButton614 , oooooooooooo
-; Gui, Add, Button, x406 y217 %defaultTextButtonSize% gButton615 , oooooooooooo
+Gui, Add, Button, x406 y217 %defaultTextButtonSize% gButton615 , Print 8.5x11 draft on 5200 for proofing
 
 ;------------------------SETTINGS------------------------
 
@@ -558,7 +559,7 @@ return
 
 Button405:
     goToFinale()
-    spaceSystemsEvenlyWithoutChanging()
+    spaceSystemsWithAdditionalGaps()
 return
 
 Button406:
@@ -583,7 +584,7 @@ return
 
 Button410:
 	goToFinale()
-
+	printConcert()
 return
 
 Button411:
@@ -761,7 +762,7 @@ return
 
 Button615:
 	goToFinale()
-
+	printDraftOnLetter()
 return
 
 

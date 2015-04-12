@@ -150,6 +150,15 @@ easyChoose(comboBoxNumber, whichOption, winTitle)
 	}
 }
 
+easyChooseString(comboBoxNumber, string, winTitle)
+{
+	loop, % comboBoxNumber.MaxIndex()
+	{
+		gg:= % comboBoxNumber[a_index]
+		Control, ChooseString, % string[a_index], ComboBox%gg%, %winTitle%
+	}
+}
+
 
 positionMeasureNumber(buttonNumber,myComboBox1,myComboBox2,HDistanceFromStaff,VDistanceFromStaff)
 {
