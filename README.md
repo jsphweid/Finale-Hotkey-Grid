@@ -1,8 +1,13 @@
 # Finale-Hotkey-Grid
-Finale Hotkey Grid is an alternative hotkey layout for Finale using the Grid and a Graphical User Interface (GUI).  WINDOWS ONLY.  In additiona to handling basic tool switching with a visually guided GUI (switching from the Selection Tool to Speedy Note Entry), the GRID 
+Finale Hotkey Grid is an alternative hotkey layout for Finale using the Grid and a Graphical User Interface (GUI).  Currently, it is only available for Windows. Instead of combinations of keys depressed, it uses a sequence. With the help of a visual interface that is toggled by using CAPS LOCK, the interface guides you through a host of preprogrammed macros that do everything from simple tool switching to re-configuring measure numbering styles. The current version operates outside of Finale as a AutoHotkey script.
 
-Instead of combinations of keys depressed, it uses a sequence. With the help of a visual interface that is toggled by using CAPS LOCK, the interface guides you through a host of preprogrammed macros that do everything from simply switching tools to re-configuring measure numbering styles. The current version operates outside of Finale as an Autohotkey script to execute simple (tool switches) and complex (adding inserts, preparing parts) macros in Finale.
+The Grid itself was I believed invented by Blizzard for the game Warcraft 3.  It has since been used in other games as well.  Basically it's a 5 x 3 table of buttons that, when pressed, run certain macros.  The buttons correspond intuitively to the left hand on the computer keyboard:
 
+```autohotkey
+q w e r t
+a s d f g
+z x c v b
+```
 
 # Getting Started
 - Download [zip](https://github.com/jsphweid/Finale-Hotkey-Grid/archive/v0.19.zip)
