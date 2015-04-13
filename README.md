@@ -77,7 +77,9 @@ You can see from the code above that the basic button assignment is in two parts
 
 If you know a bit of AutoHotkey, you can add your own functions to finaleMacros.ahk and make your own buttons in this way.
 
-# Development ToDos
+# Future Development
 
-- link to location of exe on getting started
-- 
+Here are a list of things that I would like to see happen but am not able to do and there may be too many limitations in AutoHotkey.
+- GUI improvements - one should be able to easily switch the buttons around without changing code.  This is somehow possible with a lot of AHK knowledge but isn't currently worth my time to learn.
+- Cross-Platform - Because AHK is only for Windows and most serious Finale people use MAC, I'm interested in writing something cross-platform using a more robust language than AHK.  Unfortunately this may prove difficult as each OS has their own set of languages and unique ways of handling their own automation.  If a universal interface could somehow be designed and then the actual macros be executed by things like AHK and AppleScript or Quickeys, that might work well, but I don't know how possible this is currently.
+- Integration in Finale - this may be possible in the future with JW Lua.  Writing a fully fledged plugin in C++ is impractical because I don't know the language and obtaining a PDK is not currently possible.
