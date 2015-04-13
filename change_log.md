@@ -5,10 +5,10 @@ v0.19 (released 2015-02-15)
 
 # Past versions
 
-### v0.18 (released 2015-02-13)
+#### v0.18 (released 2015-02-13)
 -added pictures to most of the front page macros...
 
-v0.17 (released 2015-02-13)
+#### v0.17 (released 2015-02-13)
 -added macros to increase measure width, print with multiple pdf writers,
 -changed my score layouts
 -make / delete group on selected staves
@@ -22,19 +22,19 @@ v0.17 (released 2015-02-13)
 	-they are also remembered in a settings.ini file
 -a smaller macro of macros that checks ties, durations, runs jw accidentals, puts in score dividers.
 
-v0.16 (released 2015-01-12)
+#### v0.16 (released 2015-01-12)
 -a few more functional macros
 -better handling of errors and making things run slightly faster
 -fixed a few bugs caused by the last version
 -new macros including transpose, check ties/etc., run jw accidentals, fix score spacing (beta), capitalize, etc.
 
 
-v0.15 (released 2014-12-30)
+#### v0.15 (released 2014-12-30)
 -created new "create expression" buttons for hidden, bold above the staff, italic below
 -added many more macros
 -updated the code to use smarter/faster menu selecting
 
-v0.14 (released 2014-12-22)
+#### v0.14 (released 2014-12-22)
 -code is all separated and working
 
 v0.13 (released 2014-12-22)
