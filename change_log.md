@@ -1,6 +1,6 @@
 # Current version
 
-v0.19 (released 2015-02-15)
+#### v0.19 (released 2015-02-15)
 -fixed sizes of picture buttons
 
 # Past versions
@@ -37,15 +37,15 @@ v0.19 (released 2015-02-15)
 #### v0.14 (released 2014-12-22)
 -code is all separated and working
 
-v0.13 (released 2014-12-22)
+#### v0.13 (released 2014-12-22)
 -basically the same as v0.12 but with better code.  It works, mostly.
 
-v0.12 (released 2014-12-21)
+#### v0.12 (released 2014-12-21)
 -Force Caps Lock to shut off when the program starts
 -added more scrolling functionality (f1-f4)
 -binded the ` key to alternate Transcribe and Finale
 -added some code for smoother switching
 -added a handful of complex macros (large time signature, measure number styles)
 
-v0.11 (released 2014-11-23)
+#### v0.11 (released 2014-11-23)
 -first version
