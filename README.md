@@ -1,7 +1,11 @@
 # Finale-Hotkey-Grid
-Finale Hotkey Grid is an alternative hotkey layout for Finale using the Grid and a Graphical User Interface (GUI).  Currently, it is only available for Windows. Instead of combinations of keys depressed, it uses a sequence. With the help of a visual interface that is toggled by using CAPS LOCK, the interface guides you through a host of preprogrammed macros that do everything from simple tool switching to re-configuring measure numbering styles. The current version operates outside of Finale as a AutoHotkey script.
+Finale Hotkey Grid is an alternative hotkey layout for Finale using a Graphical User Interface (GUI) that's called the Grid.  Currently, it is only available for Windows. Instead of combinations of keys depressed, it uses a sequence. With the help of a visual interface that is toggled by using CAPS LOCK, the interface guides you through a host of preprogrammed macros that do everything from simple tool switching to re-configuring measure numbering styles. The current version operates outside of Finale as a AutoHotkey script.
 
-The Grid itself was I believed invented by Blizzard for the game Warcraft 3.  It has since been used in other games as well.  Basically it's a 5 x 3 table of buttons that, when pressed, run certain macros.  The buttons correspond intuitively to the left hand on the computer keyboard:
+Click [here](https://www.youtube.com/watch?v=5nQlKz-0oxw) for an older demonstration video.
+
+Blizzard created the grid for RTS games like Warcraft 3 and Starcraft 2 as an ergonomic/logical way of approaching hotkeys for those games.
+
+I use it in a similar way: as a 5 x 3 table of buttons. When pressed, these buttons run certain macros.  The buttons correspond intuitively to the left hand on the computer keyboard:
 
 ```autohotkey
 q w e r t
@@ -9,16 +13,18 @@ a s d f g
 z x c v b
 ```
 
+Additionally, buttons 1-9 directly above the grid change tabs/menus.
+
 # Getting Started
 - Download [zip](https://github.com/jsphweid/Finale-Hotkey-Grid/archive/v0.19.zip)
 - Extract zip to any folder
 - Run finale-grid-hotkey executable that works for your processor (either 32 bit or 64 bit)
 - While Finale is running, hit CAPS to toggle on/off the GUI and you're there!
 
-All you really need to run the Finale Hotkey Grid is the .exe and the folder "icons."  These two things must be in the same folder (they are by default).
+All you really need to run the Finale Hotkey Grid is the .exe and the folder "icons".  These two things must be in the same folder (they are by default).
 
 # Making Modifications
-Alright.  So maybe you want to switch some of the buttons around or add your own macros to my interface.  Cool.  Currently, the only way to do any of these is to change some code.  But it's okay, it's not that difficult, even if you can't really code.  To start, you must have AutoHotkey installed.
+Alright.  So maybe you want to switch some of the buttons around or add your own macros to my interface.  Cool.  Currently, the only way to do any of these things is to change some code.  Don't worry... it's not that difficult, even if you can't really code.  To start, you must have AutoHotkey installed.
 
 ## Installing AutoHotkey and an optional text editor
 Download the most current version from [AHKScript.org](http://ahkscript.org/).  After you install that, it might be wise to get a good text editor.  Sure you can just open the scripts in Notepad and edit them, but there is no highlighting, auto-complete, and other things that make more advanced text editors preferable to code with.  I use Sublime Text 3.  There is a package for AHK thankfully available [here](https://github.com/ahkscript/SublimeAutoHotkey).  Additionally, you can use [SciTE4AutoHotkey](http://fincs.ahk4.net/scite4ahk/).  All are free.
@@ -26,12 +32,12 @@ Download the most current version from [AHKScript.org](http://ahkscript.org/).  
 ## How-to-Mod...
 
 ### Introduction
-Now we're ready to change some code. Load up your text editor of choice and open the finale-hotkey-grid.ahk file.  This is the main script file. In the folder "includes" are four other .ahk files that are necessary for the main file to run. I could have put all of the lines of code in one big file but I chose to separate them for the sake of organization.  
+Now we're ready to change some code. Load up your text editor of choice and open the "finale-hotkey-grid.ahk" file.  This is the main script file. In the folder "includes" are four other .ahk files that are necessary for the main file to run. I could have put all of the lines of code in one big file but I chose to separate them for the sake of organization.  
 
 ### Modify button names
 Let's say we simply want to change the name of a button because you didn't like my name.
 
-Open finale-hotkey-grid.ahk in your text editor of choice.Search for "Transpose". The first instance you'll come across is probably this:
+Open "finale-hotkey-grid.ahk" in your text editor of choice. Search for "Transpose". The first instance you'll come across is probably this:
 ```autohotkey
 Gui, Add, Button, x6 y37 %defaultTextButtonSize% gButton101, Transpose
 ```
@@ -49,8 +55,8 @@ And by the way, the layout of the buttons:
 The second tab/menu would be:
 201-202-203-204-205, etc.
 
-### Going Deeper
-Let's talk a little more about the routing. Besides the main script file, the only other .ahk file you might mess with is "finaleMacros.ahk".This file contains all of the actually macros: functions in this case. The functions, in this case, are nothing more than a set of instructions to tell the computer what to do. A basic example (in plain English): click here, click there, hit enter, wait for a window to be active, type "45", hit enter again. Those instructions might take up lines 70-86 in some .ahk file. How do I tell the computer to execute those lines every time a button is pressed? Basically, by wrapping it in {}'s and giving it a name like myFirstMacro(). That's all a basic function is.
+## Going Deeper
+Let's talk a little more about the routing. Besides the main script file, the only other .ahk file you might mess with is "finaleMacros.ahk". This file contains all of the actually macros: functions in this case. Functions, in this case, are nothing more than a set of instructions to tell the computer what to do. A basic example (in plain English): click here, click there, hit enter, wait for a window to be active, type "45", hit enter again. Those instructions might take up lines 70-86 in some .ahk file. How do I tell the computer to execute those lines every time a button is pressed? Basically, by wrapping it in {}'s and giving it a name like myFirstMacro(). That's all a basic function is.
 
 So where is the part that tells the computer to run a particular function when a button is pressed?  Let's continue.
 
