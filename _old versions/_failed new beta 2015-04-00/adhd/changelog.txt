@@ -1,0 +1,142 @@
+Key:
+! : Warning
+* : Comment
+= : Change / Fix
++ : Added feature
+
+3.2.2 4th Nov 2014
++ Joystick buttons can now be bound on the Bindings tab.
++ Joystick button up event simulated as if it were a key
++ bind_mode_on and bind_mode_off events added
+
+3.2.1 16th July 2014
+= Update Notification system no longer throws an error if the URL is unreachable.
+
+3.2.0 22nd May 2014
+= PassThru mode is now ON by default if "Limit App" is OFF.
+  This is to stop you accidentally binding Left Mouse to something whilst Limit App is off, thus locking you out of Windows ;)
+= Major rework of (un)binding code
+  There should be less quirky behavior now when you change bindings or enable / disable pass-thru, wild, limit app etc.
+
+3.1.1 22nd May 2014
+! New version REQUIRES AutoHotKey version 1.1.15.00
+* A big thanks to AHK Author Lexikos for changes to AHK to enable this long awaited feature!
+  http://www.autohotkey.com/board/topic/102265-
++ Bindings can now be defined as "Pass-Thru" or not. This is analagous to AHK's ~ prefix.
+  When Enabled, the binding will not be hidden from the game.
+  When Disabled, ADHD will attempt to hide that key from the game.
+
+3.0.3 2nd Mar 2014
+= Hotkeys now removed on rebind. Fixes #22
+= Debug info for hotkey adding / removing now also shows prefixes
+
+3.0.2 25th Feb 2014
+* Hotkey boxes scale to the width of the GUI
+* Code reorganisation, of no consequence to script authors.
+
+3.0.1 24th Feb 2014
+= Ooops! I left a debug message in, was triggering any time you pressed fire.
+
+3.0.0 24th Feb 2014
+= Moved to three number semantic versioning system
++ Version checks now regognise newer, older, or same number versions.
+= option_changed removed from debug list - it provided no information
+= Order in debug window reversed, so last item is always on top.
+  This is quicker than scrolling the window constantly to keep the bottom in view.
+= Profile manipulation much more robust.
+  Should no longer be possible to have duplicate profile names etc.
+= Fixed slight incompatibility issue
+  Pollution of global namespace (DisplayToolTip and RemoveToolTip)
+  These now have ADHD_ prefixes
+= functions / variables *default_app* are now *limit_app*
+= Moved majority of functions / data into a "private" object.
+  To make it clear what functions are intended to be called by library users.
++ Added functions config_get_limit_app() and config_get_limit_app_on() to avoid need to access globals
++ get_debug_mode() function added
++ Tooltip code no longer runs if AHK GUI is not the current window.
+
+
+2.2 5th Jan 2014
+= Fixed bindings tab a little - SPACE now works properly, BACKSPACE support restored.
+
+2.1 7th Dec 2013
++ Added mechanism to detect INI version
+  Used if you change format of INI file, and wish to warn users not to try to load an invalid profile
+= Fixed bug:
+  When copying a profile, then exiting would cause the original (not the copied) profile being loaded on next run
+
+2.0 20th Nov 2013
++ Can now add more than just a main tab.
+  Set ADHD.tab_list to an array of strings to add more tabs.
++ Added tab_change event hook
++ Added on_exit event hook that runs when the script closes
++ Added Update Notification system.
+  You can specify ADHD.config_updates("<url>") to designate a URL where the script will look for a text file.
+  The script then checks its version number against the contents of the text file (Looking for a "version=xxx" line)
+= Gui is now not shown until ADHD.finish_startup() is called.
+
+1.16 7th Oct 2013
+= Fixes resolution_changed event to not fire on minimize / maximize event
+  A bit of a bodgy fix for now (height <= 30px is considered minimized) as AHK not detecting state properly.
+
+1.15 1st Oct 2013
+= Fixed bug with profiles. When you changed profile, the old bindings were not being removed properly.
+  This could cause some very odd behaviour, especially if running two copies of an ADHD macro
+
+1.14 20th Sep 2013
++ Added "Functionality Toggle" binding to all macros. This highly requested feature will enable / disable all hotkeys.
+= Fixed bug with binding keys - typing a letter into the keyboard box could cause the app to go nuts.
+
+1.13 8th Sep 2013
+= Fixed bug with binding modified (Ctrl, Alt, Shift) controls - eg trying to bind Ctrl+LMB would give an error.
+
+1.12 6th Sep 2013
++ Added ability to bind Left Control, Alt or Shift by only ticking the modifier boxes
+
+1.11 27th Aug 2013
++ New function: run_as_admin
+  Ensures script is running as admin
+
+1.10 20th Aug 2013
+= Fixed bug - if you close an ADHD app while it is minimized,
+  the window no longer disappears off-screen next time you load
+
+1.9 11th Aug 2013
+= If none of the CTRL, Shift or Alt options in the Bindings tab are ticked for a binding,
+ then it will work even if CTRL, Shift or Alt are held down
+
+1.8 15th Jul 2013
+= The tooltip system now works again
+
+1.7 15th Jul 2013
+= The help link is no longer hard wired to fire control
++ There is now a help parameter in config_about to allow you to configure seperate homepage and help pages
+
+1.6 15th Jul 2013
++ There is now a method ADHD.config_get_default_app_on() that can detect whether the "Limit App" feature is on
++ Copy and Rename profile input boxes now start populated with an appropriate value
++ The profile select box is now wider to accomodate longer profile names
+
+1.5 14th Jul 2013
++ There is now a config option ADHD.config_ignore_noaction_warning() that allows you to make macros with no hotkeys
+
+1.4 14th Jul 2013
+= Fixed bug: If you disabled "Limit Application", the hotkey bindings would not work until you restarted the macro.
+Also, hotkeys are now disabled in the "proper" way.
+
+1.3 10th Jul 2013
+= Fixed bug where changing profiles would not change the setting of a binding if the new setting was "None".
+Thus, settings could duplicate from one profile to another.
+= Add mode now adds a blank profile, instead of just copying the current one.
+
+1.2 7th Jul 2013
++ Added a new hook - resolution_change. Fires when the resolution of the "Limit app" window changes.
+
+1.1 7th Jul 2013
+= Fixed bug where app_active was being fired instead of app_inactive. 
+
+1.0 6th Jul 2013
+* Initial Class Library version
+
+0.x
+* Initial dev versions, not recorded

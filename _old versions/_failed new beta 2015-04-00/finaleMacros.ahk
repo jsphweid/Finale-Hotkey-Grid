@@ -1360,35 +1360,7 @@ transpose()
 	endTranspose:
 }
 
-runJWLuaScript(scriptLocation)
-{
-	WinMenuSelectItem, Finale,,Plug-ins,JW Lua...
-	If ErrorLevel
-	{
-		WinMenuSelectItem, Finale,,Plug-ins,JWTools,JW Lua...
-		If ErrorLevel
-		{
-			MsgBox, Couldn't find the menu item "JW Lua."  Place it directly in Plug-ins or a folder called "JWTools"
-			Goto, JWLuaEnding
-		}
-
-	}
-	WinWaitActive, JW Lua
-	Control,TabRight,,SysTabControl321
-	Control,TabRight,,SysTabControl321
-	Control,TabRight,,SysTabControl321
-	Control,TabRight,,SysTabControl321
-
-
-	JWLuaEnding:
-}
-
 makeAllUpperCase()
-{
-	runJWLuaScript("test")
-}
-
-makeAllUpperCaseOld()
 {
 	goToTextSearchAndReplace()
 	sleep 300
