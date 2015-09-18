@@ -1,3 +1,6 @@
+# Attention
+This version is no longer being developed. Development has shifted focus to the Hotkey-Grid a related but more abstracted and flexible design for general use. Here is that GitHub page: https://github.com/jsphweid/hotkey-grid .
+
 # Finale-Hotkey-Grid
 Finale Hotkey Grid is an alternative hotkey layout for Finale using a Graphical User Interface (GUI) that's called the Grid.  Currently, it is only available for Windows. Instead of combinations of keys depressed, it uses a sequence. With the help of a visual interface that is toggled by using CAPS LOCK, the interface guides you through a host of preprogrammed macros that do everything from simple tool switching to re-configuring measure numbering styles. The current version operates outside of Finale as a AutoHotkey script.
 
