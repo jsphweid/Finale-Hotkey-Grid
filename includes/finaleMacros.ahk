@@ -12,6 +12,21 @@ goToDocumentOptions()
 		goToDocumentOptions()
 }
 
+goToResizePage()
+{
+	WinWaitActive, Finale
+	WinMenuSelectItem,Finale,,Page Layout,Resize Pages (Page Reduction)...
+	if ErrorLevel
+	{
+		activatePageLayoutTool()
+		sleep 100
+		goToResizePage()
+	}
+	WinWaitActive, Resize Page
+	if ErrorLevel
+		goToResizePage()
+}
+
 changeTimeSigInDocOptions(sequence,font, type, size, top, bottom,topEditNumber,bottomEditNumber)
 {
 	WinWaitActive, Finale
@@ -132,6 +147,7 @@ switchToInches()
 	WinWaitActive, Finale
 	WinMenuSelectItem,Finale,,Edit,Measurement Units,Inches
 }
+
 switchToSpaces()
 {
 	WinWaitActive, Finale
@@ -178,12 +194,14 @@ goToPageFormatForParts()
 	WinMenuSelectItem,Finale,,Document, Page Format, Parts...
 	WinWaitActive, Page Format for Parts
 }
+
 goToPageFormatForScore()
 {
 	WinWaitActive, Finale
 	WinMenuSelectItem,Finale,,Document, Page Format, Score...
 	WinWaitActive, Page Format for Score
 }
+
 goToEditMeasureNumberRegions()
 {
 	WinWaitActive, Finale
@@ -215,20 +233,6 @@ goToManageParts()
 		goToManageParts()
 }
 
-goToResizePage()
-{
-	WinWaitActive, Finale
-	WinMenuSelectItem,Finale,,Page Layout,Resize Pages (Page Reduction)...
-	if ErrorLevel
-	{
-		activatePageLayoutTool()
-		sleep 100
-		goToResizePage()
-	}
-	WinWaitActive, Resize Page
-	if ErrorLevel
-		goToResizePage()
-}
 
 goToEditSystemMargins()
 {
@@ -476,6 +480,12 @@ activateExpressionTool()
 	WinMenuSelectItem,Finale,,Tools,Expression
 }
 
+activateSecondaryBeamBreak()
+{
+	WinWaitActive, Finale
+	WinMenuSelectItem, Finale,, Tools, Advanced Tools, Special Tools, Secondary Beam Break
+}
+
 activateSpeedyNoteEntry()
 {
 	WinWaitActive, Finale
@@ -485,7 +495,7 @@ activateSpeedyNoteEntry()
 activateSelectionTool()
 {
 	WinWaitActive, Finale
-	Send ^s
+	Send, {Esc}
 	WinMenuSelectItem,Finale,,Tools,Selection Tool
 }
 
@@ -619,45 +629,71 @@ activateChordTool()
 switchToLayer1()
 {
 	goToMoveCopyLayers()
-	Send 2{Enter}
+	Send 7{Enter}
 }
 
 switchToLayer2()
 {
 	goToMoveCopyLayers()
-	Send 1{Enter}
+	Send 6{Enter}
 }
 
 doubleNoteLengths()
 {
 	goToChangeNoteDurations()
-	Send {Tab 4}{Down}{Enter}
+	Control, ChooseString, 200`%, ComboBox1, Change Note Durations
+	ControlClick, Button1, Change Note Durations,,,, NA
 }
 
 halveNoteLengths()
 {
 	goToChangeNoteDurations()
-	Send {Tab 4}{Up}{Enter}
+	Control, ChooseString, 50`%, ComboBox1, Change Note Durations
+	ControlClick, Button1, Change Note Durations,,,, NA
 }
 
 pasteDynamicsOnly()
 {
 	goToEditFilter()
-	Send !nvi{Enter}
+	ControlClick, Button3, Edit Filter,,,, NA
+	easyCheck([12, 14], Edit Filter)
+	ControlClick, Button1, Edit Filter,,,, NA
 	WinWaitActive, Finale
-	Send ^v
+	WinMenuSelectItem,Finale,,Edit,Paste
 	sleep 100
 	ToggleFilter()
-
 }
 
 makeBigTimeSignatures()
+{
+	tryIt := runJWLuaScript("time-sigs-score-big.lua", "Time Signatures - Score - Make Big")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		addInfoToPartsOld()
+	} Else
+	{
+		goToGlobalStaffAttributes()
+	}
+}
+
+makeBigTimeSignaturesOld()
 {
 	changeTimeSigInDocOptions("ntt","EngraverTime","Regular",40,0,"-290e",7,9)
 	goToGlobalStaffAttributes()
 }
 
 makeNormalTimeSignatures()
+{
+	tryIt := runJWLuaScript("time-sigs-score-normal.lua", "Time Signatures - Score - Normal")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		makeNormalTimeSignaturesOld()
+	}
+}
+
+makeNormalTimeSignaturesOld()
 {
 	changeTimeSigInDocOptions("ntt","Maestro","Regular",24,0,0,7,9)
 	goToGlobalStaffAttributes()
@@ -728,7 +764,6 @@ makeHollywoodMeasureNumbers()
 	goToGlobalStaffAttributes()
 	easyUncheck([22], "Global Staff Attributes")
 	ControlClick, Button1, Global Staff Attributes,,,, NA
-
 }
 
 makeConventionalMeasureNumbers()
@@ -896,7 +931,6 @@ makeMultimeasureRests()
 	easyCheck([24], "Measure Number")
 	easyUncheck([23], "Measure Number")
 	send {enter}
-
 }
 
 prepPart()
@@ -925,10 +959,19 @@ dropSystemMargins()
 	WinWaitActive, Finale
 	Send {Esc}
 	activateStaffTool()
-
 }
 
 addInfoToParts()
+{
+	tryIt := runJWLuaScript("parts_add-title-page-and-all-inserts.lua", "Parts - Add Inserts and Title Page")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		addInfoToPartsOld()
+	}
+}
+
+addInfoToPartsOld()
 {
 	;delete existing inserts and blank pages
 	activatePageLayoutTool()
@@ -957,9 +1000,21 @@ addInfoToParts()
 	askAndAddInserts("part","Title","Times New Roman","Bold",14,3,3,1,2,2,-rightPageMargin,-topPageMargin)
 
 	askAndAddInserts("hidden","Total Pages","Times New Roman","Regular",18,1,2,1,2,1,-1,-0.05)
+
+	setTitlePageLayout()
 }
 
 addInfoToScore()
+{
+	tryIt := runJWLuaScript("score_add-all-inserts.lua", "Score - Add Inserts")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		addInfoToScoreOld()
+	}
+}
+
+addInfoToScoreOld()
 {
 	switchToInches()
 	activateTextTool()
@@ -1023,28 +1078,20 @@ resizePageSystemStaffAllParts()
 
 changeToXShapedNoteheads()
 {
+	tryIt := runJWLuaScript("x-shaped-noteheads-change.lua", "X-Shaped Noteheads - Change")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		changeToXShapedNoteheadsOld()
+	}	
+}
+
+changeToXShapedNoteheadsOld()
+{
 	goToChangeNoteHeads()
 	Send !n{tab}{Alt Down}{Numpad0}{Numpad1}{Numpad9}{Numpad2}{Alt Up}
 	Send {Enter}
 	WinWaitActive, Finale
-	; goToMoveCopyLayers()
-	; WinWaitActive, Move/Copy Layers
-	; Send 1
-	; Control, ChooseString, Layer 4, ComboBox1, Move/Copy Layers
-	; Send {Enter}
-	; WinWaitActive, Finale
-	; goToDocumentOptions()
-	; i := 0
-	; while (i < 90) and !(WinActive("Document Options - Layers"))
-	; {
-	; 	Send ^{tab}
-	; 	i++
-	; 	sleep, 6
-	; }
-	; WinWaitActive, Document Options - Layers
-	; Control, ChooseString, Layer 4, ComboBox1, Document Options - Layers
-	; easyUncheck([9], "Document Options - Layers")
-	; Send {Enter}
 }
 
 addOctave()
@@ -1234,6 +1281,16 @@ addTitlePage()
 
 transpose()
 {
+	tryIt := runJWLuaScript("transpose.lua", "Quick Transpose")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		transposeOld()
+	}
+}
+
+transposeOld()
+{
 	WinWaitActive, Finale
 	InputBox,upOrDown,Easy Transpose,Am I going Up ("u") or Down ("d")?`n`n("pu" and "pd" is preserve up or preserve down),,230,180
 	If ErrorLevel
@@ -1360,32 +1417,70 @@ transpose()
 	endTranspose:
 }
 
-runJWLuaScript(scriptLocation)
+runJWLuaScript(filename, pluginName)
 {
-	WinMenuSelectItem, Finale,,Plug-ins,JW Lua...
+	WinWaitActive, Finale,,.3
+	if ErrorLevel
+	{
+		WinActivate, Finale
+		WinWaitActive, Finale
+	}
+	WinMenuSelectItem, Finale,, Plug-ins, JW Lua, %filename%
 	If ErrorLevel
 	{
-		WinMenuSelectItem, Finale,,Plug-ins,JWTools,JW Lua...
-		If ErrorLevel
+		WinMenuSelectItem, Finale,, Plug-ins, JW Lua, %pluginName%
+		if ErrorLevel
 		{
-			MsgBox, Couldn't find the menu item "JW Lua."  Place it directly in Plug-ins or a folder called "JWTools"
-			Goto, JWLuaEnding
+			WinMenuSelectItem, Finale,,Plug-ins,JW Lua,JW Lua...
+			If ErrorLevel
+				return 1
+			WinWaitActive, JW Lua
+			Control,TabRight,,SysTabControl321
+			Control,TabRight,,SysTabControl321
+			Control,TabRight,,SysTabControl321
+			Control,TabRight,,SysTabControl321
+
+			FileRead, luaText, includes\luaFunctions\%filename%
+			if ErrorLevel
+			{
+				return 2
+				MsgBox, Invalid Lua Script Location... (misspelling?)
+				Exit
+			}
+
+			SciSetText(luaText, "Scintilla1", "JW Lua")
+			ControlClick, Button25, JW Lua,,,, NA
+			WinClose, JW Lua
+			WinWaitActive, Save JW Lua Script?
+			Send, !n
+
 		}
-
 	}
-	WinWaitActive, JW Lua
-	Control,TabRight,,SysTabControl321
-	Control,TabRight,,SysTabControl321
-	Control,TabRight,,SysTabControl321
-	Control,TabRight,,SysTabControl321
+	
+	WinWaitActive, Finale
 
+	JWLuaErrorEnding:
+	return 0
+}
 
-	JWLuaEnding:
+staffNamesRename()
+{
+	tryIt := runJWLuaScript("staff-names_rename.lua", "Staff Names - Rename")
+	if (tryIt == 1)
+	{
+		MsgBox, The eqvuivilant macro doesn't exist outside of the lua one you obviously don't have.
+	}
 }
 
 makeAllUpperCase()
 {
-	runJWLuaScript("test")
+	tryIt := runJWLuaScript("staff-names_make-all-uppercase.lua", "Staff Names - Make all uppercase")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		makeAllUpperCaseOld()
+	}
+
 }
 
 makeAllUpperCaseOld()
@@ -1418,6 +1513,16 @@ makeAllUpperCaseOld()
 
 increaseMeasureWidth()
 {
+	tryIt := runJWLuaScript("measure-width_increase.lua", "Measure Width - Increase")
+	if (tryIt == 1)
+	{
+		MsgBox, You don't have JW Lua and/or my scripts so unfortunately, so this will revert to the old AHK macro.
+		increaseMeasureWidthOld()
+	}		
+}
+
+increaseMeasureWidthOld()
+{
 	switchToEVPUs()
 	activateSelectionTool()
 	Sleep, 50
@@ -1434,7 +1539,6 @@ makeGroup()
 	WinMenuSelectItem, Finale,,Staff,Group and Bracket,Add...,
 	WinWaitActive, Group Attributes
 	Send, !a
-
 }
 
 deleteGroup()
@@ -1503,7 +1607,7 @@ makePartScore()
 	Gui makePartScoreGUI: Add, Checkbox, Checked vButton3, make/show big time Sigs in parts
 	Gui makePartScoreGUI: Add, Checkbox, Checked vButton4, make instrument names uppercase
 	Gui makePartScoreGUI: Add, Checkbox, Checked vButton5, add info to parts
-	Gui makePartScoreGUI: Add, Checkbox, Checked vButton6, add title page template
+	; Gui makePartScoreGUI: Add, Checkbox, Checked vButton6, add title page template
 	Gui makePartScoreGUI: Add, Checkbox, Checked vButton7, renew parts
 	Gui makePartScoreGUI: Add, Checkbox, Checked vButton8, make multimeasure rests
 	Gui makePartScoreGUI: Add, Checkbox, Checked vButton9, fit four measures per system
@@ -1516,11 +1620,11 @@ makePartScore()
 	Return 
 
 	All:
-	easyCheck([1,2,3,4,5,6,7,8,9,10,11],"Which Macros?")
+	easyCheck([1,2,3,4,5,7,8,9,10,11],"Which Macros?")
 	Return
 
 	None:
-	easyUncheck([1,2,3,4,5,6,7,8,9,10,11],"Which Macros?")
+	easyUncheck([1,2,3,4,5,7,8,9,10,11],"Which Macros?")
 	Return
 
 	GoMakePartScore: 
@@ -1537,7 +1641,7 @@ makePartScore()
 	WinActivate, Finale
 	if (Button11 = 1)
 	{
-		updatePartsTemplate()
+		forceMyPrefs()
 		deleteScoreSystemDividers()
 	}
 	if (Button1 = 1)
@@ -1554,8 +1658,8 @@ makePartScore()
 		makeAllUpperCase()
 	if (Button5 = 1)
 		addInfoToParts()
-	if (Button6 = 1)
-		setTitlePageLayout()
+	; if (Button6 = 1)
+	; 	setTitlePageLayout()
 	if (Button7 = 1)
 	{
 		goToManageParts()
@@ -1620,7 +1724,7 @@ explodeWithJW()
 
 explodeWithTG()
 {
-	WinMenuSelectItem, Finale,,TGTools,Parts,Smart Explosion of multi-part staves...
+	WinMenuSelectItem, Finale,,TGTools,Parts,Smart NNOOOOONOExplosion of multi-part staves...
 	If ErrorLevel
 	{
 		explodeWithJW()
@@ -1794,4 +1898,13 @@ spaceSystemsWithAdditionalGaps()
 	While, WinExist("Space Systems")
 		WinClose, Space Systems
 	WinWaitActive, Finale
+}
+
+flipAccidentalsEnharmonically()
+{
+	tryIt := runJWLuaScript("flip-accidentals-enharmonically.lua", "Flip Accidentals Enharmonically")
+	if (tryIt == 1)
+	{
+		MsgBox, You don't have JW Lua and/or my scripts so unfortunately, this won't work and there is no AHK alternative...
+	}	
 }

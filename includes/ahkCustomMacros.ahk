@@ -213,6 +213,18 @@ applyToAllParts()
 	WinWaitActive, Edit
 }
 
+
+forceMyPrefs()
+{
+	tryIt := runJWLuaScript("force-my-prefs.lua", "Force Joseph's Part/Score Preferences")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+		updatePartsTemplate()
+	}	
+}
+
+
 updatePartsTemplate()
 {
 	switchToInches()
@@ -244,8 +256,15 @@ prepper(scoreOrPart,firstSysIndention,additionalOffsetForLeftScorePageMargin,add
 	;fix page size, just in case
 	goToPageSize()
 	Send !a
-	easyReplaceText([2,3], [partPageWidth, partPageHeight], "Page Size")
-	Send, {Enter}
+
+	if (scoreOrPart = "part") {
+		easyReplaceText([2,3], [partPageWidth, partPageHeight], "Page Size")
+		Send, {Enter}
+	}
+	if (scoreOrPart = "score") {
+		easyReplaceText([2,3], [scorePageWidth, scorePageHeight], "Page Size")
+		Send, {Enter}
+	}
 
 
 	WinWaitActive, Finale
@@ -395,3 +414,39 @@ prepper(scoreOrPart,firstSysIndention,additionalOffsetForLeftScorePageMargin,add
 	}
 }
 
+; SciSetText("( ﾟ∀ﾟ)ｱﾊﾊ八八ﾉヽﾉヽﾉヽﾉ ＼ / ＼/ ＼", "Scintilla1", "Scratch Pad ahk_exe AutoHotkey.exe")
+
+; GeekDude wrote this in like 10 minutes one night for fun... 
+SciSetText(Text, Control, WinTitle)
+{
+	Static MEM_COMMIT := 0x1000, PAGE_READWRITE := 0x04, MEM_RELEASE := 0x8000
+	Static SCI_SETTEXT := 2181
+	WinGet, PID, PID, %WinTitle%
+	
+	hProcess := DllCall("OpenProcess", "UInt", 0x438 ; PROCESS-OPERATION|READ|WRITE|QUERY_INFORMATION
+	, "Int", False ; inherit = false
+	, "ptr", PID
+	, "UPtr")
+	
+	Length := StrPutVar(Text, Buffer, "UTF-8")
+	
+	pBuffer := DllCall("VirtualAllocEx", "ptr", hProcess, "ptr", 0
+	, "UInt", Length, "UInt", MEM_COMMIT, "UInt", PAGE_READWRITE, "UPtr")
+	
+	DllCall("WriteProcessMemory", "ptr", hProcess
+	, "ptr", pBuffer, "ptr", &Buffer, "UInt", Length, "UPtr", 0)
+	
+	SendMessage, SCI_SETTEXT, 0, pBuffer, %Control%, %WinTitle%
+	
+	DllCall("VirtualFreeEx", "ptr", hProcess, "ptr", pBuffer, "ptr", 0, "UInt", MEM_RELEASE)
+}
+
+StrPutVar(string, ByRef var, encoding)
+{
+    ; Ensure capacity.
+    VarSetCapacity( var, StrPut(string, encoding)
+        ; StrPut returns char count, but VarSetCapacity needs bytes.
+        * ((encoding="utf-16"||encoding="cp1200") ? 2 : 1) )
+    ; Copy or convert the string.
+    return StrPut(string, &var, encoding)
+}
