@@ -629,13 +629,13 @@ activateChordTool()
 switchToLayer1()
 {
 	goToMoveCopyLayers()
-	Send 7{Enter}
+	Send 2{Enter}
 }
 
 switchToLayer2()
 {
 	goToMoveCopyLayers()
-	Send 6{Enter}
+	Send 1{Enter}
 }
 
 doubleNoteLengths()
