@@ -78,10 +78,10 @@ SetCapsLockState, AlwaysOff
 Gui, Add, Tab2,x-4 y-3 w520 h330 vTabGroup  AltSubmit, Menu 1|Menu 2|Menu 3|Menu 4|Menu 5|Menu 6|Menu 7|Menu 8|Menu 9|Settings
 
 ; includes my customized macros for AHK... Things that let me write code better (better check/uncheck checkboxes)
-#Include, includes\ahkCustomMacros.ahk
+#Include, %A_ScriptDir%\includes\ahkCustomMacros.ahk
 
 ; includes all of the functions for each Finale Macro.
-#Include, includes\finaleMacros.ahk
+#Include, %A_ScriptDir%\includes\finaleMacros.ahk
 
 ; This part creates each button for each menu/tab.
 
@@ -134,7 +134,7 @@ Gui, Add, Button, x306 y127 %defaultTextButtonSize% gButton309 , Print 11 x 17
 ; Gui, Add, Button, x406 y127 %defaultTextButtonSize% gButton310 , oooooooooooo
 Gui, Add, Button, x6 y217 %defaultTextButtonSize% gButton311 , -Score-`nMake Big Time Signatures
 Gui, Add, Button, x106 y217 %defaultTextButtonSize% gButton312 , -Score-`nMake Regular Time Signatures
-; Gui, Add, Button, x206 y217 %defaultTextButtonSize% gButton313 , oooooooooooo
+Gui, Add, Button, x206 y217 %defaultTextButtonSize% gButton313 , Flip Accidentals Enharmonically
 ; Gui, Add, Button, x306 y217 %defaultTextButtonSize% gButton314 , oooooooooooo
 ; Gui, Add, Button, x406 y217 %defaultTextButtonSize% gButton315 , oooooooooooo
 
@@ -520,7 +520,7 @@ return
 
 Button313:
 	goToFinale()
-
+	flipAccidentalsEnharmonically()
 return
 
 Button314:

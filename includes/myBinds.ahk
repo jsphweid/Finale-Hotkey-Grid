@@ -17,9 +17,6 @@
 }
 #If
 
-
-
-
 ; better navigation in scroll view
 #If (WinActive("Finale"))
 ; long distance
@@ -30,7 +27,6 @@ F1::^PgUp
 F3::Send, !u{Up}{Enter}
 F2::Send, !u{Down}{Enter}
 #If
-
 
 ; align/move dynamics
 #If (WinActive("Finale"))
