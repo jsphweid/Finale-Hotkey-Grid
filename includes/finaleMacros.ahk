@@ -971,6 +971,15 @@ addInfoToParts()
 	}
 }
 
+addInfoToPartsOnePage()
+{
+	tryIt := runJWLuaScript("parts_add-title-page-and-all-inserts_onePageOrgan.lua", "Parts - Add Inserts and Title Page organ one page")
+	if (tryIt == 1)
+	{
+		MsgBox, Because you're not using JW Lua and my JW Lua scripts, this is going to take a lot longer...
+	}	
+}
+
 addInfoToPartsOld()
 {
 	;delete existing inserts and blank pages
@@ -1440,7 +1449,7 @@ runJWLuaScript(filename, pluginName)
 			Control,TabRight,,SysTabControl321
 			Control,TabRight,,SysTabControl321
 
-			FileRead, luaText, includes\luaFunctions\%filename%
+			FileRead, luaText, includes\lua\%filename%
 			if ErrorLevel
 			{
 				return 2

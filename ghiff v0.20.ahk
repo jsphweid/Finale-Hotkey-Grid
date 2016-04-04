@@ -180,7 +180,7 @@ Gui, Add, Button, x306 y37 %defaultTextButtonSize% gButton604 , Set Title Page L
 ; Gui, Add, Button, x406 y37 %defaultTextButtonSize% gButton605 , oooooooooooo
 ; Gui, Add, Button, x6 y127 %defaultTextButtonSize% gButton606 , oooooooooooo
 ; Gui, Add, Button, x106 y127 %defaultTextButtonSize% gButton607 , oooooooooooo
-; ; Gui, Add, Button, x206 y127 %defaultTextButtonSize% gButton608 , oooooooooooo
+Gui, Add, Button, x206 y127 %defaultTextButtonSize% gButton608 , Add Info to Parts - One Page
 ; ; Gui, Add, Button, x306 y127 %defaultTextButtonSize% gButton609 , oooooooooooo
 ; Gui, Add, Button, x406 y127 %defaultTextButtonSize% gButton610 , oooooooooooo
 ; Gui, Add, Button, x6 y217 %defaultTextButtonSize% gButton611 , oooooooooooo
@@ -728,7 +728,7 @@ return
 
 Button608:
     goToFinale()
-	
+    addInfoToPartsOnePage()
 return
 
 Button609:

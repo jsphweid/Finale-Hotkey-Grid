@@ -39,7 +39,7 @@ function insertBlankPageIfNone()
 	if page:Load(1) then
 		firstSys = page:GetFirstSystem()
 		if firstSys == 1 then -- first page is blank... but no set start system method or property
-			finale.FCPages.InsertBlank(1)
+			finale.FCPages.InsertBlank(1) 
 		end
 	end
 end
@@ -92,7 +92,7 @@ function addInserts(inserts)
 end
 
 insertBlankPageIfNone()
-deletePageTexts()
+deletePageTexts() 
 addInserts(inserts_titlePage)
 checkIfTitlePageExists() -- change offset
 addInserts(inserts_everythingElse)
