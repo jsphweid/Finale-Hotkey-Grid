@@ -4,8 +4,6 @@ This version is no longer being developed. Development has shifted focus to the 
 # Finale-Hotkey-Grid
 Finale Hotkey Grid is an alternative hotkey layout for Finale using a Graphical User Interface (GUI) that's called the Grid.  Currently, it is only available for Windows. Instead of combinations of keys depressed, it uses a sequence. With the help of a visual interface that is toggled by using CAPS LOCK, the interface guides you through a host of preprogrammed macros that do everything from simple tool switching to re-configuring measure numbering styles. The current version operates outside of Finale as a AutoHotkey script.
 
-Click [here](https://www.youtube.com/watch?v=5nQlKz-0oxw) for an older demonstration video.
-
 Blizzard created the grid for RTS games like Warcraft 3 and Starcraft 2 as an ergonomic/logical way of approaching hotkeys for those games.
 
 I use it in a similar way: as a 5 x 3 table of buttons. When pressed, these buttons run certain macros.  The buttons correspond intuitively to the left hand on the computer keyboard:
@@ -22,7 +20,8 @@ Additionally, buttons 1-9 directly above the grid change tabs/menus.
 - Download [zip](https://github.com/jsphweid/Finale-Hotkey-Grid/archive/v0.19.zip)
 - Extract zip to any folder
 - Run finale-grid-hotkey executable that works for your processor (either 32 bit or 64 bit)
-- While Finale is running, hit CAPS to toggle on/off the GUI and you're there!
+- While Finale is running, hit CAPS to toggle on/off the GUI and you're t
+!
 
 All you really need to run the Finale Hotkey Grid is the .exe and the folder "icons".  These two things must be in the same folder (they are by default).
 
